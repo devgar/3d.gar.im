@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build
 
 # Etapa de ejecución
-FROM node:18-alpine AS runner
+FROM node:18-alpine
 
 WORKDIR /app
 

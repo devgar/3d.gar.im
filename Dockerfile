@@ -1,13 +1,15 @@
 # Etapa de construcción
-FROM node:18-alpine AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm ci --production
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm i --prod
 
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 # Etapa de ejecución
 FROM node:18-alpine

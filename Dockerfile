@@ -3,7 +3,7 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN npm i -g pnpm
 
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm i --prod
